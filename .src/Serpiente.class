@@ -12,7 +12,7 @@
 Private miCuerpo As Cuadrado[]
 
 'tengo que saber en cada momento si me muevo a la I, D, ARR, AB
-Private direccion As String
+Private direccion As String 'Nos permite saber hacia donde nos movemos
 
 
 '####################################################
@@ -47,7 +47,7 @@ Public Sub _new(nuevaX As Short, nuevaY As Short, colorSerpiente As Integer, nue
       
 End
 
-'Moverse
+'Moverse la serpiente
 Public Sub moverse()
   'crezco
   Me.crecer()
@@ -142,4 +142,5 @@ End
 
 
 'getters
+
 
