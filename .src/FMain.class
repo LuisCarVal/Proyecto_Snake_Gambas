@@ -4,20 +4,25 @@ Private viborita As Serpiente
 
 Private iPasos As Integer
 
+'comportamientos (eventos)
 
+'Que pasa cuando pulso jugar?
 Public Sub Jugar_Click()
 
-  
+  '1º creo una serpiente
   viborita = New Serpiente(200, 300, 234543, "W")
   iPasos = 1
+  'Pongo el crono a funcionar
   Crono.Start()
   'Es lo mismo mismo mismo que: Crono.Enabled = True
 
 End
 
+'Motor del videojuego. Lógica principal de control de estado
 Public Sub Crono_Timer()
   iPasos = iPasos + 1 
   
+  'Se activa cada vez que pasan "delay" milisegundos...
   If iPasos = 3 Then
      viborita.crecer()
      
@@ -28,25 +33,31 @@ Public Sub Crono_Timer()
      
   Endif
   
-  
+  '2º comprobar si esta muerta la serpiente
   If (viborita.estasMuerta(DrawingArea1.W, DrawingArea1.H)) Then
+  'La hemos liado
+  '3º si estoy muerto entonces... paramos crono y ponemos un mensaje oblicuo
        Crono.Stop()
-       Message.Info("sacabóloquesedaba")
+       Message.Info("CHUPAMELA")
   Endif
   
-  
+  '4º si no estoy muerto... repintar la pantalla
   DrawingArea1.Refresh()
 
 End
 
+
+'Este comportamiento es para pintarse
 Public Sub DrawingArea1_Draw()
 
+  'tengo que pedir a la serpiente que se dibuje
   If (viborita <> Null) Then 
      viborita.pintarse(DrawingArea1)
   Endif
 
 End
 
+'Lo que hace el drawing area cuando se pulsa la tecla "A", "S", "D", "W"
 Public Sub DrawingArea1_KeyPress()
     If (Key.Text = "W" Or Key.Text = "A" Or Key.Text = "S" Or Key.Text = "D") Then
       viborita.cambiaDir(Key.Text)
@@ -61,3 +72,4 @@ Public Sub Form_KeyPress()
   
 
 End
+
