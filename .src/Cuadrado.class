@@ -1,5 +1,10 @@
 ' Gambas class file
 
+
+'Esta clasee sera la que permita darle forma a nuestra serpiente.
+'Una serpiente será un conjunto de cuadros que irán pintandose y moviendose por la pantalla
+
+
 '####################################################
 
 'ESTADO - ATRIBUTOS
@@ -9,10 +14,10 @@
 'un color para pintarse
 'lado en pixeles
 'necesitamos poner el cuadrado en un determinado pixel: x,y
-Private colorCuadrado As Integer
-Private lado As Short
-Private posX As Short
-Private posY As Short
+Private colorCuadrado As Integer  'Color del cuadrado codificado como número entero.
+Private lado As Short 'Se trata del tamaño del cuadrado, del lado, medido en número de pixeles
+Private posX As Short  'Posición horizontal de nuestro cuadrado. Será un valor entre 0 y el tamaño horizontal del tablero - 1
+Private posY As Short  'Posición vertical de nuestro cuadrado. Será un valor entre 0 y el tamaño vertical del tablero - 1
 
 
 
@@ -70,16 +75,17 @@ Public Sub pintarse(tablero As DrawingArea)
     
     colorLoteria = Color.RGB(Rand(200, 255), Rand(0, 50), Rand(0, 255))
   
-    Paint.Begin(tablero)
-    Paint.Brush = Paint.Color(colorLoteria)
-    Paint.Rectangle(posX, posY, lado, lado) 
-    Paint.Fill 
-    Paint.End
+    Paint.Begin(tablero) 'El objeto Paint es un pintor, y utiliza un lienzo (en este caso nuestro DrawingArea
+    Paint.Brush = Paint.Color(colorLoteria) 'Después creamos una brocha con el color de nuestro cuadrado que queremos que sea random
+    Paint.Rectangle(posX, posY, lado, lado)  'Pintamos un cuadrado "Rectangle"  
+    Paint.Fill 'Rellenamos el interior del cuadrado recién pintado
+    Paint.End 'Liberamos el lienzo para que el sistema pueda llevarlo a la pantalla.
   
 End
 
 
 'getters
+'Son típicas. Es la manera de "publicar" los valores de mi estado mateniendo la seguridad en el acceso
 Public Function getColor() As Integer
   
    Return colorCuadrado
@@ -113,5 +119,4 @@ Public Function colisiona(otroCuadrado As Cuadrado) As Boolean
   Return bResultado
   
 End
-
 
